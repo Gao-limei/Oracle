@@ -1,4 +1,4 @@
-# Oracle
+# 实验一：SQL语句的执行计划分析与优化指导
 ## 实验目的
 
 ##### 分析SQL执行计划，执行SQL语句的优化指导。理解分析SQL语句的执行计划的重要作用。
@@ -13,7 +13,7 @@
 ## 实验步骤
 ### 对Oracle12c中的HR人力资源管理系统中的表查询分析：
 
-##### 利用创建索引后的查询语句1查询：
+##### 利用查询语句1查询：
 
 ```SQL
 set autotrace on
@@ -68,29 +68,14 @@ GROUP BY d.department_name;
    HAVING d.department_name in ('IT','Sales');
    ```
 
-   由于网络环境较差，重复实验较多。某些步骤无法复现。当用户hr没有统计权限，运行语句报错
-
-   ```text  
-   无法收集统计信息, 请确保用户具有正确的访问权限。
-   统计信息功能要求向用户授予 v_$sesstat, v_$statname 和 v_$session 的选择权限。
-   ```
-
-   此时可以利用`GRANT`语句授予hr权限。
-
-   ```SQL
-   GRANT SELECT ON v_$sesstat TO hr;
-   GRANT SELECT ON v_$statname TO hr;
-   GRANT SELECT ON v_$session TO hr;
-   
-   ```
-
    
 
-   查询语句1分析：
+ #### 查询语句1分析：
 
- ![](https://raw.githubusercontent.com/Gao-limei/pictures/master/20210316110655.png)
+![](https://raw.githubusercontent.com/Gao-limei/pictures/master/20210316110655.png)
 
    优化指导有：
+
 ![](https://raw.githubusercontent.com/Gao-limei/pictures/master/20210316111803.png)
 
    
@@ -99,9 +84,9 @@ GROUP BY d.department_name;
 
 ![](https://raw.githubusercontent.com/Gao-limei/pictures/master/20210316112324.png)
 
-   
 
-   此处仅贴出查询2分析：
+   
+ #### 查询语句2分析：
 
 ![](https://raw.githubusercontent.com/Gao-limei/pictures/master/20210316112539.png)
 
@@ -117,5 +102,5 @@ GROUP BY d.department_name;
    and d.department_name in ('Shipping')
    GROUP BY department_name,e.EMPLOYEE_id,e.job_id;
    ```
-   
+
 ![](https://raw.githubusercontent.com/Gao-limei/pictures/master/20210316112652.png)
